@@ -18,14 +18,14 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh 'docker build -t your-image-name .'
+                sh 'docker build -t webshopingNextjs .'
             }
         }
         stage('Push to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'your-dockerhub-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'dckr_pat_kQEcwu1H9RaaJn65rb5EGX7lWbo', usernameVariable: 'dachtrakun1973', passwordVariable: 'DOCdach1973KER')]) {
                     sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-                    sh 'docker push your-image-name'
+                    sh 'docker push webshopingNextjs'
                 }
             }
         }
