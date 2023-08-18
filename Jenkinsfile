@@ -1,33 +1,41 @@
 pipeline {
     agent any
+
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-        stage('Build') {
+
+        stage('Install Dependencies') {
             steps {
                 sh 'npm install'
             }
         }
-        stage('Test') {
+
+        stage('Build') {
             steps {
-                sh 'npm test'
+                sh 'npm run dev'
             }
         }
-        stage('Docker Build') {
-            steps {
-                sh 'docker build -t nextjs-app .'
-            }
-        }
-        stage('Push to Docker Hub') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dckr_pat_kQEcwu1H9RaaJn65rb5EGX7lWbo', usernameVariable: 'dachtrakun1973', passwordVariable: 'DOCdach1973KER')]) {
-                    sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-                    sh 'docker push nextjs-app'
-                }
-            }
-        }
+
+        // stage('Test') {
+        //     steps {
+        //         sh 'npm test'
+        //     }
+        // }
+
+        // stage('Deploy') {
+        //     steps {
+        //         sh 'npm run deploy'
+        //     }
+        // }
     }
+
+    // post {
+    //     always {
+    //         cleanWs()  // ลบ workspaces เมื่อเสร็จสิ้น
+    //     }
+    // }
 }
