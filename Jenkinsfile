@@ -1,28 +1,34 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:20-alpine'  // ใช้ภาพ Docker ของ Node.js เวอร์ชัน 14
-        }
-    }
+    agent any
 
     stages {
-        stage('Checkout') {
+        stage('build') {
             steps {
-                checkout scm
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
+                echo 'Installing Dependencies'
                 sh 'npm install'
+				echo 'Building NextJS App'
+				sh 'node_modules/next/dist/bin/next build'
+                // sh 'npm run dev'
             }
         }
 
-        stage('Build') {
-            steps {
-                sh 'npm run dev'
-            }
-        }
+        // stage('Checkout') {
+        //     steps {
+        //         checkout scm
+        //     }
+        // }
+
+        // stage('Install Dependencies') {
+        //     steps {
+        //         sh 'npm install'
+        //     }
+        // }
+
+        // stage('Build') {
+        //     steps {
+        //         sh 'npm run dev'
+        //     }
+        // }
 
         // stage('Test') {
         //     steps {
