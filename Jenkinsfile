@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'shopingweb'  // ใช้ภาพ Docker ของ Node.js เวอร์ชัน 14
+        }
+    }
 
     stages {
         stage('Checkout') {
