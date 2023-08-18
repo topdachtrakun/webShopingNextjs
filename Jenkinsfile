@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'shopingweb'  // ใช้ภาพ Docker ของ Node.js เวอร์ชัน 14
+            image 'node:20-alpine'  // ใช้ภาพ Docker ของ Node.js เวอร์ชัน 14
         }
     }
 
